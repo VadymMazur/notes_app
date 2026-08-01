@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 
-def hello_from_Notes_app(request):
+def hello_from_notes_app(request):
     return HttpResponse("Hello, from Notes app!")
 
 #def current_time(request):
