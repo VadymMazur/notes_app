@@ -1,10 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Notes app</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+<header>
+    <nav>
+        <a href="/">Головна</a>
+        <a href="/about">Про нас</a>
+    </nav>
+</header>
+
+<h1>{{title}}</h1>
+
+<p class="card">{{message}}</p>
+<ul>
+    {% for product in products %}
+        <li>{{product}}</li>
+    {% endfor %}
+</ul>
+
+<a href='https://github.com/VadymMazur/notes_app' target='blank'>Перейти на сайт</a>
+
 
 </body>
 </html>

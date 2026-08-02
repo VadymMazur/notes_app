@@ -1,0 +1,9 @@
+p {
+        color: green;
+        font-size: 25px;
+    }
+    .card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+    }
