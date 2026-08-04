@@ -1,13 +1,13 @@
-import datetime
-import os
 from django.shortcuts import render
-from django.http import HttpResponse
+
+from .models import Note
 
 
 def hello_from_notes_app(request):
+    notes = Note.objects.select_related('category').all()
+
     context = {
-        'title': 'Моя сторінка',
-        'message': 'Привіт світ!',
-        'products': ['element1', 'element2', 'element3']
+        'title': 'Мої нотатки',
+        'notes': notes,
     }
     return render(request, 'index.html', context)

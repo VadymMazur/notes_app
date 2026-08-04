@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <title>Notes app</title>
@@ -14,14 +14,18 @@
     </nav>
 </header>
 
-<h1>{{title}}</h1>
+<h1>{{ title }}</h1>
 
-<p class="card">{{message}}</p>
-<ul>
-    {% for product in products %}
-        <li>{{product}}</li>
-    {% endfor %}
-</ul>
+{% for note in notes %}
+    <article class="card">
+        <h2>{{ note.title }}</h2>
+        <p>{{ note.text }}</p>
+        <p><strong>Категорія:</strong> {{ note.category.title }}</p>
+        <p><strong>Нагадування:</strong> {{ note.reminder|date:"d.m.Y" }}</p>
+    </article>
+{% empty %}
+    <p>Нотаток поки немає.</p>
+{% endfor %}
 
 <a href='https://github.com/VadymMazur/notes_app' target='blank'>Перейти на сайт</a>
 
