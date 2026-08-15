@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}{% if form.instance.pk %}Редагування{% else %}Нова нотатка{% endif %}{% endblock %}
+{% block content %}
+<h1>{% if form.instance.pk %}Редагувати нотатку{% else %}Створити нотатку{% endif %}</h1>
+<form class="panel" method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Зберегти</button> <a href="{% if form.instance.pk %}{% url 'note_detail' form.instance.pk %}{% else %}{% url 'note_list' %}{% endif %}">Скасувати</a></form>
+{% endblock %}
