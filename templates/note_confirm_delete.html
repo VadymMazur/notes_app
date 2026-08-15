@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}Видалення{% endblock %}
+{% block content %}<form class="panel" method="post">{% csrf_token %}<h1>Видалити нотатку?</h1><p>Видалити «{{ note.title }}»?</p><button class="danger" type="submit">Так, видалити</button> <a href="{% url 'note_detail' note.pk %}">Скасувати</a></form>{% endblock %}
