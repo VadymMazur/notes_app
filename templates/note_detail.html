@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}{{ note.title }}{% endblock %}
 {% block content %}
-<article class="panel"><h1>{{ note.title }}</h1><p>{{ note.text|linebreaksbr }}</p><p><strong>Категорія:</strong> {{ note.category.title }}</p><p><strong>Нагадування:</strong> {{ note.reminder|date:'d.m.Y' }}</p><a class="button" href="{% url 'note_edit' note.pk %}">Редагувати</a> <a class="button danger" href="{% url 'note_delete' note.pk %}">Видалити</a> <a href="{% url 'note_list' %}">До списку</a></article>
+<article class="panel"><h1>{{ note.title }}</h1><p>{{ note.text|linebreaksbr }}</p><p><strong>Категорія:</strong> {{ note.category.title }}</p><p><strong>Нагадування:</strong> {{ note.reminder|date:'d.m.Y' }}</p><p><strong>Власник:</strong> {{ note.user.username }}</p>{% if note.user == user %}<a class="button" href="{% url 'note_edit' note.pk %}">Редагувати</a> <a class="button danger" href="{% url 'note_delete' note.pk %}">Видалити</a>{% endif %} <a href="{% url 'note_list' %}">До списку</a></article>
 {% endblock %}
