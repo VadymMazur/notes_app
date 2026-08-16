@@ -24,3 +24,14 @@ class NoteViewsTests(TestCase):
     def test_search_and_filters(self):
         response = self.client.get(reverse('note_list'), {'search': 'зустріч ІЗ КОМАНДОЮ', 'category': self.category.pk, 'reminder': '2026-08-20'})
         self.assertContains(response, self.note.title)
+
+    def test_bootstrap_navigation_and_form(self):
+        list_response = self.client.get(reverse('note_list'))
+        form_response = self.client.get(reverse('note_create'))
+        self.assertContains(list_response, 'bootstrap@5.3.8')
+        self.assertContains(list_response, reverse('note_list'))
+        self.assertContains(list_response, reverse('note_create'))
+        self.assertContains(form_response, 'class="form-control"')
+        self.assertContains(form_response, 'class="form-select"')
+        self.assertContains(list_response, 'bootstrap.bundle.min.js')
+        self.assertContains(list_response, 'class="navbar-toggler"')

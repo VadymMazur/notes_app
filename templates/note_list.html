@@ -1,14 +1,62 @@
 {% extends 'base.html' %}
+
 {% block title %}Мої нотатки{% endblock %}
+
 {% block content %}
-<h1>Мої нотатки</h1>
-<form class="filters" method="get">
-    <label>Пошук за назвою<input type="search" name="search" value="{{ request.GET.search }}"></label>
-    <label>Категорія<select name="category"><option value="">Усі категорії</option>{% for category in categories %}<option value="{{ category.pk }}" {% if request.GET.category == category.pk|stringformat:'s' %}selected{% endif %}>{{ category.title }}</option>{% endfor %}</select></label>
-    <label>Дата нагадування<input type="date" name="reminder" value="{{ request.GET.reminder }}"></label>
-    <div><button type="submit">Застосувати</button> <a href="{% url 'note_list' %}">Очистити</a></div>
-</form>
-<section class="grid">
-{% for note in notes %}<article class="card"><h2><a href="{% url 'note_detail' note.pk %}">{{ note.title }}</a></h2><p>{{ note.text|truncatewords:30 }}</p><p><strong>Категорія:</strong> {{ note.category.title }}</p><p><strong>Нагадування:</strong> {{ note.reminder|date:'d.m.Y' }}</p></article>{% empty %}<p>Нотаток не знайдено.</p>{% endfor %}
-</section>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Мої нотатки</h1>
+            <a href="{% url 'note_create' %}" class="btn btn-primary">Створити нотатку</a>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="get" class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label">Пошук за назвою</label>
+                        <input class="form-control" type="search" name="search" value="{{ request.GET.search }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Категорія</label>
+                        <select class="form-select" name="category">
+                            <option value="">Усі категорії</option>
+                            {% for category in categories %}
+                                <option value="{{ category.pk }}" {% if request.GET.category == category.pk|stringformat:'s' %}selected{% endif %}>{{ category.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Дата нагадування</label>
+                        <input class="form-control" type="date" name="reminder" value="{{ request.GET.reminder }}">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">Застосувати</button>
+                        <a href="{% url 'note_list' %}" class="btn btn-secondary mt-2">Очистити</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for note in notes %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                <a href="{% url 'note_detail' note.pk %}" class="text-decoration-none">{{ note.title }}</a>
+                            </h2>
+                            <p class="card-text">{{ note.text|truncatewords:30 }}</p>
+                            <p><strong>Категорія:</strong> {{ note.category.title }}</p>
+                            <p><strong>Нагадування:</strong> {{ note.reminder|date:'d.m.Y' }}</p>
+                            <a href="{% url 'note_detail' note.pk %}" class="btn btn-outline-primary">Деталі</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">Нотаток не знайдено.</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

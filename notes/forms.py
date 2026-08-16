@@ -9,6 +9,8 @@ class NoteForm(forms.ModelForm):
         fields = ['title', 'text', 'reminder', 'category']
         labels = {'title': 'Назва', 'text': 'Текст', 'reminder': 'Дата нагадування', 'category': 'Категорія'}
         widgets = {
-            'reminder': forms.DateInput(attrs={'type': 'date'}),
-            'text': forms.Textarea(attrs={'rows': 6}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
+            'reminder': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'category': forms.Select(attrs={'class': 'form-select'}),
         }
