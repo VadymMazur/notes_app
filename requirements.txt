@@ -1,2 +1,5 @@
 Django==5.2.15
 pyTelegramBotAPI==4.36.1
+pytest==9.1.1
+pytest-django==4.14.0
+factory-boy==3.3.3
