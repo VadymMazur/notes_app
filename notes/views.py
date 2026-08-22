@@ -113,6 +113,11 @@ class NoteUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.get_object().user == self.request.user
 
+    def form_valid(self, form):
+        if 'reminder' in form.changed_data:
+            form.instance.reminder_sent = False
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse_lazy('note_detail', kwargs={'pk': self.object.pk})
 

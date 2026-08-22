@@ -16,6 +16,8 @@ class Note(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     reminder = models.DateField()
+    sent_to_telegram = models.BooleanField(default=False)
+    reminder_sent = models.BooleanField(default=False)
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,

@@ -1,1 +1,2 @@
 Django==5.2.15
+pyTelegramBotAPI==4.36.1
